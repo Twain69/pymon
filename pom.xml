@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.flegler</groupId>
+	<artifactId>pymon</artifactId>
+	<packaging>rpm</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>pymon</name>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<finalName>pymon</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.1-alpha-3</version>
+				<extensions>true</extensions>
+				<configuration>
+					<copyright>2014, flegler.com</copyright>
+					<distribution></distribution>
+					<group>Monitoring</group>
+					<packager>SWWDC</packager>
+					<prefix>/usr/share</prefix>
+					<changelogFile>src/changelog</changelogFile>
+					<defineStatements>
+						<defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+					</defineStatements>
+					<mappings>
+						<mapping>
+							<directory>/usr/share/pymon/</directory>
+							<filemode>660</filemode>
+							<username>root</username>
+							<groupname>root</groupname>
+							<sources>
+								<source>
+									<location>src/main/resources</location>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
+
