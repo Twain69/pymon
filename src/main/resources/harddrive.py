@@ -27,7 +27,7 @@ def checkFreeSpace(config):
         
         percentClean = int(percent.split("%")[0])
         if percentClean >= minFreePercent:
-            notification.error("device " + str(device) + " usage: " + str(percentClean) + "% (min " + str(minFreePercent) + "%) mountpoint: " + mountpoint)
+            notification.error(config, "device " + str(device) + " usage: " + str(percentClean) + "% (min " + str(minFreePercent) + "%) mountpoint: " + mountpoint)
         else:
             notification.printVerbose("checked {0:20s} usage: {1:3d}% (min: {2:3d}%, device: {3:10s})".format(mountpoint, percentClean, minFreePercent, device))
                 
@@ -68,10 +68,10 @@ def checkRaidStatus(config):
                 totalDevices = int(totalDevices)
                 activeDevices = int(activeDevices)
                 if totalDevices != activeDevices:
-                    notification.error("RAID {0:0s} is degraded. {1:0d} disks total, {2:0d} disks active ".format(deviceName, totalDevices, activeDevices))
+                    notification.error(config, "RAID {0:0s} is degraded. {1:0d} disks total, {2:0d} disks active ".format(deviceName, totalDevices, activeDevices))
                 else:
                     notification.printVerbose("RAID " + deviceName + " is OK")
             else:
-                notification.error("Could not determine details of RAID " + deviceName)
+                notification.error(config, "Could not determine details of RAID " + deviceName)
     else:
         notification.printVerbose("RAID status check is disabled")

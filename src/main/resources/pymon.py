@@ -24,8 +24,6 @@ import process
 import hardware
 import notification
 
-harddriveMinFree = 80
-
 verbose = False
 
 def parseArguments():
@@ -39,9 +37,12 @@ if __name__ == '__main__':
     args = parseArguments()
     notification.setVerbose(args.verbose)
     
-    f = open(args.configFile)
-    config = yaml.safe_load(f)
-    f.close()
+    try:
+        f = open(args.configFile)
+        config = yaml.safe_load(f)
+        f.close()
+    except IOError:
+        config = None
     
     notification.printVerbose("\n **** verbose mode ****")
     

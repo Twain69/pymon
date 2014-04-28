@@ -5,9 +5,18 @@ Created on 19.04.2014
 '''
 
 import pymon
+import smtplib
+import socket
+
+from email.mime.text import MIMEText
 
 
-def error(msg):
+def error(config, msg):
+    msg = MIMEText()
+    
+    msg['Subject'] = "Error on " + socket.gethostname() + " (pymon)"
+    msg['From'] = "servermaster@flegler.com"
+    #msg['To'] = 
     #TODO: send mail!
     printVerbose("**** ERROR: " + msg)
 
