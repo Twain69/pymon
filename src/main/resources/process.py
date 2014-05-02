@@ -51,13 +51,13 @@ def checkProcessRunning(config):
                         found = True
             
             if found is False:
-                notification.error("-> Process " + processName + " not found, trying to start")
+                notification.error(config, "Process " + processName + " not found, trying to start")
                 os.system(startCommand)
             else:
                 if processOwner is not "" and processOwner != user:
-                    notification.error("-> Process " + processName + " found, but process owner is wrong: " + user + " instead of " + processOwner)
+                    notification.error(config, "Process " + processName + " found, but process owner is wrong: " + user + " instead of " + processOwner)
                 else:
-                    notification.printVerbose("-> Process " + processName + " running, process owner: " + user)
+                    notification.printVerbose("Process " + processName + " running, process owner: " + user)
         
         else:
             notification.printVerbose("Check for process " + processName + " is disabled, skipping")

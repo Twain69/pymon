@@ -1,4 +1,6 @@
 notification:
+  status: enabled
+  smtpserver: sydney.flegler.com
   sender: pymon@flegler.com
   recipients:
     - recipient: servermaster@flegler.com

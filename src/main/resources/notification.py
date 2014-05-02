@@ -8,16 +8,23 @@ import pymon
 import smtplib
 import socket
 
-from email.mime.text import MIMEText
-
-
 def error(config, msg):
-    msg = MIMEText()
-    
-    msg['Subject'] = "Error on " + socket.gethostname() + " (pymon)"
-    msg['From'] = "servermaster@flegler.com"
-    #msg['To'] = 
-    #TODO: send mail!
+
+    if config['notification']['status'] == "enabled":   
+        sender = config['notification']['sender']
+        subject = "Error on " + socket.gethostname() + " (pymon)"
+        
+        for recipient in config['notification']['recipients']:
+            recipient = recipient['recipient']
+            message = """From: %s
+To:  %s
+Subject: %s
+
+%s
+""" % (sender, recipient, subject, msg) 
+            
+            s = smtplib.SMTP('localhost')
+            s.sendmail(sender, [recipient], message)
     printVerbose("**** ERROR: " + msg)
 
 def printMessage(offset, msg):
