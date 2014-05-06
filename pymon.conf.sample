@@ -4,13 +4,21 @@ notification:
   sender: pymon@flegler.com
   recipients:
     - recipient: servermaster@flegler.com
+
 harddrive:
   name: Harddrive configuration
   minFreeSpace: 80
+  override:
+    - mountPoint: /home
+      minFreeSpace: 70
+    - mountPoint: /tmp
+      minFreeSpace: 50
+
 raid:
   status: disabled
   devices:
     - name: /dev/md126
+
 processes:
   - name: eclipse
     startCommand: echo Hello World Eclipse
@@ -19,3 +27,19 @@ processes:
   - name: Blub
     startCommand: echo Hello World Blub process
     status: disabled
+    
+hardware:
+  fanSpeed:
+    minSpeed: 500
+    override:
+      - name: fan1
+        minSpeed: 500
+      - name: fan2
+        minSpeed: 2000
+      - name: fan2
+        minSpeed: 2000
+  coreTemp:
+    - name: Core 0
+      maxTemp: 55
+    - name: Core 1
+      maxTemp: 55

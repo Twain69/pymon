@@ -6,13 +6,10 @@ Created on 18.04.2014
 '''
 
 #TODO List:
-# checkRaidStatus has to be tested
-# add pymon.conf as sample to rpm deployment
-# Override of harddrive min free percent per partition
-#
 # Functions needed:
 #   ping_destination with script running when destination is not available
 #   check hetzner backup space
+#   check cpu temperatur
 
 import argparse
 import yaml

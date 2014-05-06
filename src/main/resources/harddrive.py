@@ -6,15 +6,14 @@ Created on 19.04.2014
 
 import subprocess
 import notification
-from blivet.devices import deviceNameToDiskByPath
 
 def checkFreeSpace(config):
     notification.printHeader("Checking harddrive free space")
     
     try:
-        minFreePercent = config['harddrive']['minFreeSpace']
+        defaultMinFreePercent = config['harddrive']['minFreeSpace']
     except (KeyError, TypeError):
-        minFreePercent = 80
+        defaultMinFreePercent = 80
     
     df = subprocess.Popen(["df", "-P"], stdout=subprocess.PIPE)
     output = df.communicate()[0]
@@ -24,6 +23,16 @@ def checkFreeSpace(config):
         device = line.split()[0]
         percent = line.split()[4]
         mountpoint = line.split()[5]
+        
+        minFreePercent = defaultMinFreePercent
+        
+        try:
+            for override in config['harddrive']['override']:
+                if mountpoint == override['mountPoint']:
+                    minFreePercent = override['minFreeSpace']
+                    break
+        except (KeyError, TypeError):
+            pass
         
         percentClean = int(percent.split("%")[0])
         if percentClean >= minFreePercent:
@@ -60,9 +69,9 @@ def checkRaidStatus(config):
             
             for row in lines:
                 if "Total Devices" in row:
-                    totalDevices = row.split(":")[1].trim()
+                    totalDevices = int(row.split(":")[1])
                 if "Active Devices" in row:
-                    activeDevices = row.split(":")[1].trim()
+                    activeDevices = int(row.split(":")[1])
             
             if totalDevices is not None and activeDevices is not None:
                 totalDevices = int(totalDevices)

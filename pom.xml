@@ -5,9 +5,13 @@
 	<groupId>com.flegler</groupId>
 	<artifactId>pymon</artifactId>
 	<packaging>rpm</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>pymon</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<build>
 		<finalName>pymon</finalName>
@@ -15,11 +19,11 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>rpm-maven-plugin</artifactId>
-				<version>2.1-alpha-3</version>
+				<version>2.1-alpha-4</version>
 				<extensions>true</extensions>
 				<configuration>
 					<requires>
-						<require>PyYAML &gt; 3.10</require>
+						<require>python-argparse &gt; 1.0</require>
 					</requires>
 					<copyright>2014, flegler.com</copyright>
 					<distribution></distribution>
@@ -33,27 +37,34 @@
 					<mappings>
 						<mapping>
 							<directory>/usr/share/pymon/</directory>
-							<filemode>660</filemode>
+							<filemode>770</filemode>
 							<username>root</username>
 							<groupname>root</groupname>
 							<sources>
 								<source>
-									<filter>*py</filter>
 									<location>src/main/resources</location>
-																		
 								</source>
 							</sources>
 						</mapping>
-						
+
 						<mapping>
 							<directory>/etc</directory>
-							<filemode>660</filemode>
 							<username>root</username>
 							<groupname>root</groupname>
 							<sources>
 								<source>
 									<location>pymon.conf.sample</location>
 								</source>
+							</sources>
+						</mapping>
+						
+						<mapping>
+							<directory>/usr/sbin/</directory>
+							<sources>
+								<softlinkSource>
+									<destination>pymon</destination>
+									<location>/usr/share/pymon/pymon.py</location>
+								</softlinkSource>
 							</sources>
 						</mapping>
 					</mappings>

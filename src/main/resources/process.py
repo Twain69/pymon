@@ -45,21 +45,25 @@ def checkProcessRunning(config):
                 # $ ps auxwww | head -n1
                 # USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
                 # -> command is starting at position 10
-                for row in elements[10:-1]:
-                    if processName in row:
-                        user = elements[0]
-                        found = True
+                combinedProcessName = ""
+                for row in elements[10:]:
+                    combinedProcessName = combinedProcessName + " " + row
+                combinedProcessName = combinedProcessName.strip()
+                    
+                if processName in combinedProcessName:
+                    user = elements[0]
+                    found = True
             
             if found is False:
-                notification.error(config, "Process " + processName + " not found, trying to start")
+                notification.error(config, "Process '" + processName + "' not found, trying to start")
                 os.system(startCommand)
             else:
                 if processOwner is not "" and processOwner != user:
-                    notification.error(config, "Process " + processName + " found, but process owner is wrong: " + user + " instead of " + processOwner)
+                    notification.error(config, "Process '" + processName + "' found, but process owner is wrong: " + user + " instead of " + processOwner)
                 else:
-                    notification.printVerbose("Process " + processName + " running, process owner: " + user)
+                    notification.printVerbose(" Process '" + processName + "' running, process owner: " + user)
         
         else:
-            notification.printVerbose("Check for process " + processName + " is disabled, skipping")
+            notification.printVerbose("Check for process '" + processName + "' is disabled, skipping")
             
         #notification.printVerbose("")
