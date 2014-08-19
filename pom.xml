@@ -4,7 +4,7 @@
 	<groupId>com.flegler</groupId>
 	<artifactId>pymon</artifactId>
 	<packaging>rpm</packaging>
-	<version>1.0.2.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<name>pymon</name>
 	<url>http://maven.apache.org</url>
 
