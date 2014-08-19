@@ -1,17 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.flegler</groupId>
 	<artifactId>pymon</artifactId>
 	<packaging>rpm</packaging>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>pymon</name>
 	<url>http://maven.apache.org</url>
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/Twain69/pymon.git</developerConnection>
-	</scm>
+	  <tag>1.0.1</tag>
+  </scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,7 +30,7 @@
 						<require>python-argparse &gt; 1.0</require>
 					</requires>
 					<copyright>2014, flegler.com</copyright>
-					<distribution></distribution>
+					<distribution />
 					<group>Monitoring</group>
 					<packager>SWWDC</packager>
 					<prefix>/usr/share</prefix>
@@ -112,7 +112,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
