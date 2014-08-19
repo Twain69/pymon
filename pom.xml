@@ -53,6 +53,7 @@
 
 						<mapping>
 							<directory>/etc</directory>
+							<directoryIncluded>false</directoryIncluded>
 							<username>root</username>
 							<groupname>root</groupname>
 							<configuration>true</configuration>
