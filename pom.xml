@@ -38,6 +38,9 @@
 					<defineStatements>
 						<defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
 					</defineStatements>
+					<requires>
+						<require>PyYAML &gt; 3.0</require>
+					</requires>
 					<mappings>
 						<mapping>
 							<directory>/usr/share/pymon/</directory>
