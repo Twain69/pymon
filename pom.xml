@@ -55,9 +55,10 @@
 							<directory>/etc</directory>
 							<username>root</username>
 							<groupname>root</groupname>
+							<configuration>true</configuration>
 							<sources>
 								<source>
-									<location>pymon.conf.sample</location>
+									<location>pymon.conf</location>
 								</source>
 							</sources>
 						</mapping>
