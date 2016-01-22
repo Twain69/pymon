@@ -77,7 +77,7 @@ def checkRaidStatus(config):
                 totalDevices = int(totalDevices)
                 activeDevices = int(activeDevices)
                 if totalDevices != activeDevices:
-                    notification.error(config, "RAID {0:0s} is degraded. {1:0d} disks total, {2:0d} disks active ".format(deviceName, totalDevices, activeDevices))
+                    notification.error(config, "RAID " + str(deviceName) + " is degraded. " + str(totalDevices) + " disks total, " + str(activeDevices) + " disks active ")
                 else:
                     notification.printVerbose("RAID " + deviceName + " is OK")
             else:
