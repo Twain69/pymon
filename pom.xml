@@ -4,13 +4,13 @@
 	<groupId>com.flegler</groupId>
 	<artifactId>pymon</artifactId>
 	<packaging>rpm</packaging>
-	<version>1.2.1</version>
+	<version>1.2.2-SNAPSHOT</version>
 	<name>pymon</name>
 	<url>http://maven.apache.org</url>
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/Twain69/pymon.git</developerConnection>
-	  <tag>1.2.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<properties>
