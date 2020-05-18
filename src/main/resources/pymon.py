@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
 Created on 18.04.2014
 
@@ -31,22 +31,22 @@ def parseArguments():
 if __name__ == '__main__':
     args = parseArguments()
     notification.setVerbose(args.verbose)
-    
+
     try:
         f = open(args.configFile)
         config = yaml.safe_load(f)
         f.close()
     except IOError:
         config = None
-    
+
     notification.printVerbose("\n **** verbose mode ****")
-    
+
     harddrive.checkFreeSpace(config)
-    
+
     process.checkProcessRunning(config)
-    
+
     harddrive.checkRaidStatus(config)
-    
+
     hardware.checkCPUTemperatur(config)
-    
+
     hardware.checkFanSpeed(config)
