@@ -11,6 +11,8 @@ import os
 
 
 def checkDestinationAvailable(config):
+    notification.printHeader("Checking network destinations")
+
     try:
         destinations = config['network']
     except (KeyError, TypeError):
@@ -24,7 +26,7 @@ def checkDestinationAvailable(config):
         notification.printVerbose("Checking if destination '" + ip + "' is reachable")
         icmp = IP(dst=ip) / ICMP()
 
-        response = sr1(icmp, timeout=5)
+        response = sr1(icmp, timeout=5, verbose=config['verbose'])
         if response is None:
             notification.error(config, "Destination '" + ip + "' not reachable")
             os.system(startCommand)

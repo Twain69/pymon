@@ -36,9 +36,11 @@ if __name__ == '__main__':
     try:
         f = open(args.configFile)
         config = yaml.safe_load(f)
+        config['verbose'] = args.verbose
         f.close()
     except IOError:
         config = None
+        config['verbose'] = 0
 
     notification.printVerbose("\n **** verbose mode ****")
 
