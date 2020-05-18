@@ -18,6 +18,7 @@ import harddrive
 import process
 import hardware
 import notification
+import network
 
 verbose = False
 
@@ -50,3 +51,5 @@ if __name__ == '__main__':
     hardware.checkCPUTemperatur(config)
 
     hardware.checkFanSpeed(config)
+
+    network.checkDestinationAvailable(config)

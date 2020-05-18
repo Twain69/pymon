@@ -24,21 +24,21 @@ def checkFreeSpace(config):
         percent = line.split()[4]
         mountpoint = line.split()[5]
 
-        minFreePercent = defaultMinFreePercent
+        minFreePercent: int = defaultMinFreePercent
 
         try:
             for override in config['harddrive']['override']:
                 if mountpoint == override['mountPoint']:
-                    minFreePercent = override['minFreeSpace']
+                    minFreePercent = int(override['minFreeSpace'])
                     break
         except (KeyError, TypeError):
             pass
 
         percentClean = int(percent.split(b"%")[0])
         if percentClean >= minFreePercent:
-            notification.error(config, "device " + str(device) + " usage: " + str(percentClean) + "% (min " + str(minFreePercent) + "%) mountpoint: " + mountpoint)
+            notification.error(config, "device {} usage: {}% (min {}%) mountpoint: {}".format(device.decode('UTF-8'), percentClean, minFreePercent, mountpoint.decode('UTF-8')))
         else:
-            notification.printVerbose("checked {0:20s} usage: {1:3d}% (min: {2:3d}%, device: {3:10s})".format(str(mountpoint), percentClean, minFreePercent, str(device)))
+            notification.printVerbose("checked {0:20s} usage: {1:3d}% (min: {2:3d}%, device: {3:10s})".format(mountpoint.decode('UTF-8'), percentClean, minFreePercent, device.decode('UTF-8')))
 
 
 def checkRaidStatus(config):
@@ -62,16 +62,16 @@ def checkRaidStatus(config):
 
             mdadm = subprocess.Popen(["mdadm", "--detail", deviceName], stdout=subprocess.PIPE)
             output = mdadm.communicate()[0]
-            lines = output.split("\n")
+            lines = output.split(b"\n")
 
             totalDevices = None
             activeDevices = None
 
             for row in lines:
-                if "Total Devices" in row:
-                    totalDevices = int(row.split(":")[1])
-                if "Active Devices" in row:
-                    activeDevices = int(row.split(":")[1])
+                if b"Total Devices" in row:
+                    totalDevices = int(row.split(b":")[1])
+                if b"Active Devices" in row:
+                    activeDevices = int(row.split(b":")[1])
 
             if totalDevices is not None and activeDevices is not None:
                 totalDevices = int(totalDevices)

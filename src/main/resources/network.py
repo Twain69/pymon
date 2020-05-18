@@ -9,6 +9,7 @@ import notification
 from scapy.layers.inet import IP, ICMP
 import os
 
+
 def checkDestinationAvailable(config):
     try:
         destinations = config['network']
@@ -21,10 +22,10 @@ def checkDestinationAvailable(config):
         startCommand = dest['startCommand']
 
         notification.printVerbose("Checking if destination '" + ip + "' is reachable")
-        icmp = IP(dst=ip)/ICMP()
+        icmp = IP(dst=ip) / ICMP()
 
         response = sr1(icmp, timeout=5)
-        if response == None:
+        if response is None:
             notification.error(config, "Destination '" + ip + "' not reachable")
             os.system(startCommand)
         else:

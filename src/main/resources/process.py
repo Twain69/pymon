@@ -47,7 +47,7 @@ def checkProcessRunning(config):
                 # -> command is starting at position 10
                 combinedProcessName = ""
                 for row in elements[10:]:
-                    combinedProcessName = combinedProcessName + " " + row
+                    combinedProcessName = combinedProcessName + " " + row.decode('UTF-8')
                 combinedProcessName = combinedProcessName.strip()
 
                 if processName in combinedProcessName:
@@ -58,10 +58,10 @@ def checkProcessRunning(config):
                 notification.error(config, "Process '" + processName + "' not found, trying to start")
                 os.system(startCommand)
             else:
-                if processOwner != "" and processOwner != user:
-                    notification.error(config, "Process '" + processName + "' found, but process owner is wrong: " + user + " instead of " + processOwner)
+                if processOwner != "" and processOwner != user.decode('UTF-8'):
+                    notification.error(config, "Process '" + processName + "' found, but process owner is wrong: " + user.decode('UTF-8') + " instead of " + processOwner)
                 else:
-                    notification.printVerbose(" Process '" + processName + "' running, process owner: " + user)
+                    notification.printVerbose(" Process '" + processName + "' running, process owner: " + user.decode('UTF-8'))
 
         else:
             notification.printVerbose("Check for process '" + processName + "' is disabled, skipping")
